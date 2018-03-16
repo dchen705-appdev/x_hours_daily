@@ -10,7 +10,8 @@ class CategoriesController < ApplicationController
   end
 
   def index
-    @categories = current_user.categories.page(params[:page]).per(10)
+    @q = current_user.categories.ransack(params[:q])
+      @categories = @q.result(:distinct => true).includes(:user, :tasks).page(params[:page]).per(10)
 
     render("categories/index.html.erb")
   end
