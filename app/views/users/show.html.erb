@@ -23,3 +23,65 @@
     </div>
   </div>
 </div>
+
+<!-- A User has many tasks -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Tasks
+      </li>
+
+      <% @user.tasks.each do |task| %>
+        <li class="list-group-item">
+          <a href="/tasks/<%= task.id %>">
+            <%= task.name %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/tasks/<%= task.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/tasks/<%= task.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_task/<%= task.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+<!-- A User has many categories -->
+
+<div class="row">
+  <div class="col-md-12">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-info">
+        Categories
+      </li>
+
+      <% @user.categories.each do |category| %>
+        <li class="list-group-item">
+          <a href="/categories/<%= category.id %>">
+            <%= category.name %>
+          </a>
+          <div class="btn-group btn-group-xs pull-right">
+            <a href="/categories/<%= category.id %>" class="btn btn-primary">
+              <i class="fa fa-search-plus"></i>
+            </a>
+            <a href="/categories/<%= category.id %>/edit" class="btn btn-warning">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a href="/delete_category/<%= category.id %>" class="btn btn-danger" rel="nofollow">
+              <i class="fa fa-trash-o"></i>
+            </a>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
