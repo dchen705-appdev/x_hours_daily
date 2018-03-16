@@ -23,7 +23,7 @@
         <td><%= task.deadline %></td>
         <td><%= task.status %></td>
         <td><%= task.user.email %></td>
-        <td><%= task.category_id %></td>
+        <td><%= task.category.name %></td>
         <td>
           <a href="/tasks/<%= task.id %>" class="btn btn-primary">Show</a>
           <a href="/tasks/<%= task.id %>/edit" class="btn btn-warning">Edit</a>
