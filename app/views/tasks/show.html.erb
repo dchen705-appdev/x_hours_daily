@@ -15,10 +15,22 @@
       <dd><%= @task.status %></dd>
 
       <dt>User</dt>
-      <dd><%= @task.user_id %></dd>
+      <dd>
+        <% if @task.user.present? %>
+          <a href="/users/<%= @task.user_id %>">
+            <%= @task.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
       <dt>Category</dt>
-      <dd><%= @task.category_id %></dd>
+      <dd>
+        <% if @task.category.present? %>
+          <a href="/categories/<%= @task.category_id %>">
+            <%= @task.category.name %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 

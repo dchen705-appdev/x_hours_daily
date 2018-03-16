@@ -22,8 +22,20 @@
         <td><%= task.name %></td>
         <td><%= task.deadline %></td>
         <td><%= task.status %></td>
-        <td><%= task.user.email %></td>
-        <td><%= task.category.name %></td>
+        <td>
+          <% if task.user.present? %>
+            <a href="/users/<%= task.user.id %>">
+              <%= task.user.email %>
+            </a>
+          <% end %>
+        </td>
+        <td>
+          <% if task.category.present? %>
+            <a href="/categories/<%= task.category.id %>">
+              <%= task.category.name %>
+            </a>
+          <% end %>
+        </td>
         <td>
           <a href="/tasks/<%= task.id %>" class="btn btn-primary">Show</a>
           

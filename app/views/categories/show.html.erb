@@ -9,7 +9,13 @@
       <dd><%= @category.name %></dd>
 
       <dt>User</dt>
-      <dd><%= @category.user_id %></dd>
+      <dd>
+        <% if @category.user.present? %>
+          <a href="/users/<%= @category.user_id %>">
+            <%= @category.user.email %>
+          </a>
+        <% end %>
+      </dd>
 
     </dl>
 
