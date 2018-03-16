@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :current_user_must_be_task_user, :only => [:edit, :update, :destroy]
+  before_action :current_user_must_be_task_user, :only => [:show, :edit, :update, :destroy]
 
   def current_user_must_be_task_user
     task = Task.find(params[:id])
