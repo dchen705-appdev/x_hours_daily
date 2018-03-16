@@ -20,8 +20,11 @@
         <td><%= category.user.email %></td>
         <td>
           <a href="/categories/<%= category.id %>" class="btn btn-primary">Show</a>
-          <a href="/categories/<%= category.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_category/<%= category.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          
+          <% if current_user == category.user %>
+            <a href="/categories/<%= category.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_category/<%= category.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>

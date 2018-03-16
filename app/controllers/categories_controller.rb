@@ -1,4 +1,14 @@
 class CategoriesController < ApplicationController
+  before_action :current_user_must_be_category_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_category_user
+    category = Category.find(params[:id])
+
+    unless current_user == category.user
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @categories = Category.all
 
