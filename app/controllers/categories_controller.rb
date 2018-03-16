@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :current_user_must_be_category_user, :only => [:edit, :update, :destroy]
+  before_action :current_user_must_be_category_user, :only => [:show, :edit, :update, :destroy]
 
   def current_user_must_be_category_user
     category = Category.find(params[:id])
