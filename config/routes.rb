@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root :to => "tasks#index"
   # Routes for the Category resource:
   # CREATE
   get "/categories/new", :controller => "categories", :action => "new"
