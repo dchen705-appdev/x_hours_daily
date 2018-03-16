@@ -26,8 +26,11 @@
         <td><%= task.category.name %></td>
         <td>
           <a href="/tasks/<%= task.id %>" class="btn btn-primary">Show</a>
-          <a href="/tasks/<%= task.id %>/edit" class="btn btn-warning">Edit</a>
-          <a href="/delete_task/<%= task.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          
+          <% if current_user == task.user %>
+            <a href="/tasks/<%= task.id %>/edit" class="btn btn-warning">Edit</a>
+            <a href="/delete_task/<%= task.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+          <% end %>
         </td>
       </tr>
       <% end %>

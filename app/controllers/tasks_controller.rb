@@ -1,4 +1,14 @@
 class TasksController < ApplicationController
+  before_action :current_user_must_be_task_user, :only => [:edit, :update, :destroy]
+
+  def current_user_must_be_task_user
+    task = Task.find(params[:id])
+
+    unless current_user == task.user
+      redirect_to :back, :alert => "You are not authorized for that."
+    end
+  end
+
   def index
     @tasks = Task.all
 
