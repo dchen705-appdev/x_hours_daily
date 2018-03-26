@@ -27,14 +27,14 @@
         <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @category.name %>">
       </div>
 
-      
+      <input type="hidden" name="user_id" value="<%=current_user.id%>">
       
 
       <button class="btn btn-warning">
         Update Category
       </button>
       or
-      <a href="/categories/<%= @category.id %>">Cancel</a>
+      <a href="/category_edit_cancel">Cancel</a>
     </form>
   </div>
 </div>

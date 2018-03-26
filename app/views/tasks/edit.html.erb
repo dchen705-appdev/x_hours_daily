@@ -9,7 +9,7 @@
 <% end %>
 
 <div class="page-header">
-  <h3>Edit Task #<%= @task.id %></h3>
+  <h3>Edit Task</h3>
 </div>
 
 <div class="row">
@@ -30,21 +30,21 @@
       <!-- Label and input for deadline -->
       <div class="form-group">
         <label for="deadline" class="control-label">
-          Deadline
+          Deadline (include date and time)
         </label>
 
-        <input type="text" id="deadline" name="deadline" placeholder="Deadline" class="form-control" value="<%= @task.deadline %>">
+        <input type="datetime" id="deadline" name="deadline" placeholder="Deadline" class="form-control" value="<%=(@task.deadline).in_time_zone("Central Time (US & Canada)").strftime("%m/%d/%y %I:%M %p")%>">
       </div>
 
       <!-- Label and input for status -->
       <div class="form-group">
-        <label for="status" class="control-label">
-          Status
-        </label>
+       
 
-        <input type="text" id="status" name="status" placeholder="Status" class="form-control" value="<%= @task.status %>">
+        <input type="hidden" id="status" name="status" placeholder="Status" class="form-control" value="<%= @task.status %>">
       </div>
 
+      <!-- Label and input for user_id -->
+      <input type="hidden" name="user_id" value="<%= current_user.id %>">
       
       
 
@@ -54,14 +54,15 @@
           Category
         </label>
 
-        <%= select_tag(:category_id, options_from_collection_for_select(Category.all, :id, :name, @task.category_id), :class => "form-control") %>
+        <%= select_tag(:category_id, options_from_collection_for_select(Category.all.where(:user_id => current_user.id), :id, :name, @task.category_id), :class => "form-control") %>
+        <a href="/categories/new">Add a new category</a>
       </div>
 
       <button class="btn btn-warning">
         Update Task
       </button>
       or
-      <a href="/tasks/<%= @task.id %>">Cancel</a>
+      <a href="/task_edit_cancel">Cancel</a>
     </form>
   </div>
 </div>

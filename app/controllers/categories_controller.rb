@@ -25,7 +25,7 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-
+    session[:previous_url_2] = request.referrer
     render("categories/new.html.erb")
   end
 
@@ -38,14 +38,8 @@ class CategoriesController < ApplicationController
     save_status = @category.save
 
     if save_status == true
-      referer = URI(request.referer).path
-
-      case referer
-      when "/categories/new", "/create_category"
-        redirect_to("/categories")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Category created successfully.")
-      end
+    
+      redirect_to(session[:previous_url_2], :fallback_location => "/", :notice => "Category updated successfully.")  
     else
       render("categories/new.html.erb")
     end
@@ -53,7 +47,7 @@ class CategoriesController < ApplicationController
 
   def edit
     @category = Category.find(params[:id])
-
+    session[:previous_url_2] = request.referrer
     render("categories/edit.html.erb")
   end
 
@@ -66,19 +60,16 @@ class CategoriesController < ApplicationController
     save_status = @category.save
 
     if save_status == true
-      referer = URI(request.referer).path
 
-      case referer
-      when "/categories/#{@category.id}/edit", "/update_category"
-        redirect_to("/categories/#{@category.id}", :notice => "Category updated successfully.")
-      else
-        redirect_back(:fallback_location => "/", :notice => "Category updated successfully.")
-      end
+        # redirect_to(:back, :fallback_location => "/", :notice => "Category updated successfully.")
+    redirect_to(session[:previous_url_2], :fallback_location => "/", :notice => "Category updated successfully.")
     else
       render("categories/edit.html.erb")
     end
   end
-
+  def category_edit_cancel
+  redirect_to(session[:previous_url_2])
+  end
   def destroy
     @category = Category.find(params[:id])
 

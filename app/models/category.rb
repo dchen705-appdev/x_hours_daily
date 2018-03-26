@@ -10,5 +10,6 @@ class Category < ApplicationRecord
   # Indirect associations
 
   # Validations
+validates :name, :presence => true, :uniqueness => { :scope => :user }
 
 end

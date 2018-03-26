@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  root :to => "tasks#index"
+  root :to => "tasks#homepage"
   # Routes for the Category resource:
   # CREATE
   get "/categories/new", :controller => "categories", :action => "new"
@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   # UPDATE
   get "/categories/:id/edit", :controller => "categories", :action => "edit"
   post "/update_category/:id", :controller => "categories", :action => "update"
+  
+  # Edit Cancel
+  get "/category_edit_cancel", :controller => "categories", :action => "category_edit_cancel"
 
   # DELETE
   get "/delete_category/:id", :controller => "categories", :action => "destroy"
@@ -31,6 +34,12 @@ Rails.application.routes.draw do
   # UPDATE
   get "/tasks/:id/edit", :controller => "tasks", :action => "edit"
   post "/update_task/:id", :controller => "tasks", :action => "update"
+  
+   # Toggle Status
+  get "/tasks/status_toggle/:id", :controller => "tasks", :action => "status_toggle"
+  
+   # Edit Cancel
+  get "/task_edit_cancel", :controller => "tasks", :action => "task_edit_cancel"
 
   # DELETE
   get "/delete_task/:id", :controller => "tasks", :action => "destroy"
@@ -41,6 +50,7 @@ Rails.application.routes.draw do
   # READ
   get "/users", :controller => "users", :action => "index"
   get "/users/:id", :controller => "users", :action => "show"
+  post "users/:id/change_worktime", :controller => "users", :action => "change_worktime"
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
